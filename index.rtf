@@ -1,0 +1,329 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww68300\viewh25120\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Portfolio - Robinhood Style</title>\
+    <script src="https://cdn.tailwindcss.com"></script>\
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>\
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">\
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />\
+    <style>\
+        body \{\
+            font-family: 'Inter', sans-serif;\
+            background-color: #0C0C0D;\
+            color: #FFFFFF;\
+        \}\
+        .text-brand-green \{\
+            color: #00C805;\
+        \}\
+        .bg-brand-green \{\
+            background-color: #00C805;\
+        \}\
+        .border-brand-green \{\
+            border-color: #00C805;\
+        \}\
+        .bg-card \{\
+            background-color: #181B1F;\
+        \}\
+        .border-card \{\
+            border-color: #282C31;\
+        \}\
+        .chart-container \{\
+            position: relative;\
+            height: 300px;\
+            width: 100%;\
+        \}\
+        .time-selector button.active \{\
+            background-color: #282C31;\
+            color: #FFFFFF;\
+        \}\
+        .hidden \{\
+            display: none;\
+        \}\
+    </style>\
+</head>\
+<body class="antialiased">\
+\
+    <!-- Login Page -->\
+    <div id="login-page" class="flex items-center justify-center min-h-screen">\
+        <div class="w-full max-w-sm p-8 space-y-8 bg-card rounded-xl shadow-lg">\
+            <div>\
+                <!-- Robinhood Logo SVG -->\
+                <svg class="w-12 h-12 mx-auto mb-4 text-brand-green" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">\
+                    <path d="M18.5,13.28a7.5,7.5,0,0,0-2.5-5.65,1,1,0,0,0-1.42,1.42,5.5,5.5,0,0,1,1.5,4.23,1,1,0,0,0,1,1,1.15,1.15,0,0,0,.29,0A1,1,0,0,0,18.5,13.28Z"/>\
+                    <path d="M12,14.25a5.47,5.47,0,0,1-4.23-1.9,1,1,0,0,0-1.42,1.42,7.47,7.47,0,0,0,5.65,2.48,1,1,0,0,0,0-2Z"/>\
+                    <path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/>\
+                    <path d="M12,11.25a1,1,0,0,0-1,1v6a1,1,0,0,0,2,0v-6A1,1,0,0,0,12,11.25Z"/>\
+                </svg>\
+                <h2 class="text-center text-4xl font-extrabold text-white">\
+                    Sign in\
+                </h2>\
+            </div>\
+            <form id="login-form" class="mt-8 space-y-6">\
+                <div class="rounded-md shadow-sm -space-y-px">\
+                    <div>\
+                        <label for="email-address" class="sr-only">Email address</label>\
+                        <input id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address">\
+                    </div>\
+                    <div class="pt-4">\
+                        <label for="password" class="sr-only">Password</label>\
+                        <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password">\
+                    </div>\
+                </div>\
+\
+                <div class="flex items-center justify-between pt-2">\
+                    <div class="text-sm">\
+                        <a href="#" class="font-medium text-brand-green hover:text-green-400">\
+                            Forgot your password?\
+                        </a>\
+                    </div>\
+                </div>\
+\
+                <div>\
+                    <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-black bg-brand-green hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500 transition-colors">\
+                        Sign in\
+                    </button>\
+                </div>\
+            </form>\
+        </div>\
+    </div>\
+\
+    <!-- Main Application Page -->\
+    <div id="app-page" class="hidden flex flex-col lg:flex-row min-h-screen">\
+        <!-- Main Content -->\
+        <main class="w-full lg:w-2/3 p-4 md:p-6 lg:p-8">\
+            <header class="mb-4">\
+                <h1 class="text-4xl font-bold tracking-tighter">Investing</h1>\
+            </header>\
+\
+            <!-- User Greeting -->\
+            <section id="user-greeting" class="mb-8">\
+                <h2 class="text-2xl text-gray-400 font-medium">Welcome, Kris D. McGuire</h2>\
+            </section>\
+\
+            <!-- Portfolio Value Section -->\
+            <section id="portfolio-value" class="mb-8">\
+                <div class="text-5xl font-bold tracking-tighter mb-1" id="portfolio-total-value">$397,572.17</div>\
+                <div class="flex items-center space-x-4 text-lg">\
+                    <span id="portfolio-change" class="text-brand-green font-medium">+ $2,504.70 (+0.63%)</span>\
+                    <span id="portfolio-period" class="text-gray-400">Today</span>\
+                </div>\
+                 <div class="flex items-center space-x-4 text-sm mt-1">\
+                    <span id="portfolio-after-hours-change" class="text-gray-400">After-hours: <span class="text-red-500">-$198.79 (-0.05%)</span></span>\
+                </div>\
+            </section>\
+\
+            <!-- Chart Section -->\
+            <section id="portfolio-chart" class="mb-8">\
+                <div class="chart-container">\
+                    <canvas id="portfolioChart"></canvas>\
+                </div>\
+                <div class="flex justify-center space-x-2 mt-4 time-selector">\
+                    <button data-period="1D" class="px-3 py-1 text-sm font-medium rounded-full text-gray-300 hover:bg-gray-700 active">1D</button>\
+                    <button data-period="1W" class="px-3 py-1 text-sm font-medium rounded-full text-gray-300 hover:bg-gray-700">1W</button>\
+                    <button data-period="1M" class="px-3 py-1 text-sm font-medium rounded-full text-gray-300 hover:bg-gray-700">1M</button>\
+                    <button data-period="3M" class="px-3 py-1 text-sm font-medium rounded-full text-gray-300 hover:bg-gray-700">3M</button>\
+                    <button data-period="1Y" class="px-3 py-1 text-sm font-medium rounded-full text-gray-300 hover:bg-gray-700">1Y</button>\
+                    <button data-period="ALL" class="px-3 py-1 text-sm font-medium rounded-full text-gray-300 hover:bg-gray-700">ALL</button>\
+                </div>\
+            </section>\
+\
+            <!-- Buying Power Section -->\
+            <section id="buying-power" class="mb-8">\
+                 <div class="bg-card border border-card rounded-lg p-4 flex justify-between items-center">\
+                    <div>\
+                        <h2 class="text-xl font-bold">Buying Power</h2>\
+                        <p class="text-gray-400 text-lg" id="buying-power-value">$963.67</p>\
+                    </div>\
+                    <button class="bg-brand-green text-black font-bold py-2 px-4 rounded-full hover:opacity-90 transition-opacity">\
+                        Deposit Funds\
+                    </button>\
+                </div>\
+            </section>\
+        </main>\
+\
+        <!-- Sidebar / Stocks List -->\
+        <aside class="w-full lg:w-1/3 lg:border-l border-card p-4 md:p-6 lg:p-8">\
+            <div class="sticky top-8">\
+                <h2 class="text-2xl font-bold mb-4">Stocks</h2>\
+                <div id="stocks-list" class="space-y-4">\
+                    <!-- Stock items will be injected here by JavaScript -->\
+                </div>\
+                <div class="mt-6">\
+                    <h2 class="text-2xl font-bold mb-4">News</h2>\
+                    <div class="space-y-4">\
+                        <div class="bg-card border border-card rounded-lg p-4">\
+                            <p class="text-sm text-gray-400">Reuters</p>\
+                            <h3 class="font-semibold">Fed holds rates steady, signals one cut likely in 2025.</h3>\
+                        </div>\
+                        <div class="bg-card border border-card rounded-lg p-4">\
+                            <p class="text-sm text-gray-400">Bloomberg</p>\
+                            <h3 class="font-semibold">Tech stocks rally on positive inflation data.</h3>\
+                        </div>\
+                         <div class="bg-card border border-card rounded-lg p-4">\
+                            <p class="text-sm text-gray-400">Associated Press</p>\
+                            <h3 class="font-semibold">NVIDIA announces new AI chip, stock surges.</h3>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>\
+        </aside>\
+    </div>\
+\
+    <script>\
+        document.addEventListener('DOMContentLoaded', function () \{\
+            // --- Page Elements ---\
+            const loginPage = document.getElementById('login-page');\
+            const appPage = document.getElementById('app-page');\
+            const loginForm = document.getElementById('login-form');\
+\
+            // --- Login Logic ---\
+            loginForm.addEventListener('submit', function(event) \{\
+                event.preventDefault(); // Prevent actual form submission\
+                const email = document.getElementById('email-address').value;\
+                const password = document.getElementById('password').value;\
+\
+                // Basic validation: just check if fields are not empty\
+                if (email && password) \{\
+                    loginPage.classList.add('hidden');\
+                    appPage.classList.remove('hidden');\
+                    initializeApp(); // Initialize the main app after login\
+                \} else \{\
+                    alert('Please enter both email and password.');\
+                \}\
+            \});\
+\
+            // --- Main App Initialization ---\
+            function initializeApp() \{\
+                // --- Base Data ---\
+                const baseValue = 397572.17;\
+                const stocks = [\
+                    \{ symbol: 'AMZN', name: 'Amazon.com Inc', shares: 200, value: 37396.00, price: 186.98 \},\
+                    \{ symbol: 'NVDA', name: 'NVIDIA Corp', shares: 330, value: 38616.60, price: 117.02 \},\
+                    \{ symbol: 'CRWD', name: 'CrowdStrike', shares: 115, value: 26675.40, price: 231.96 \},\
+                    \{ symbol: 'RYAN', name: 'Ryan Specialty', shares: 340, value: 20940.60, price: 61.59 \},\
+                    \{ symbol: 'RCL', name: 'Royal Caribbean', shares: 150, value: 23508.00, price: 156.72 \},\
+                    \{ symbol: 'MSFT', name: 'Microsoft Corp', shares: 48, value: 20080.80, price: 418.35 \},\
+                    \{ symbol: 'NVO', name: 'Novo Nordisk', shares: 150, value: 19894.50, price: 132.63 \},\
+                    \{ symbol: 'META', name: 'Meta Platforms', shares: 20, value: 9496.60, price: 474.83 \},\
+                ];\
+\
+                // --- DOM Elements ---\
+                const stocksListContainer = document.getElementById('stocks-list');\
+                const portfolioValueEl = document.getElementById('portfolio-total-value');\
+                const portfolioChangeEl = document.getElementById('portfolio-change');\
+                const portfolioPeriodEl = document.getElementById('portfolio-period');\
+                const timeSelectorButtons = document.querySelectorAll('.time-selector button');\
+\
+                // --- Populate Static Stocks List ---\
+                stocks.forEach(stock => \{\
+                    const changePercent = (Math.random() * 2 - 1).toFixed(2);\
+                    const changeValue = (stock.price * (changePercent / 100)).toFixed(2);\
+                    const isPositive = changePercent >= 0;\
+                    const stockElement = document.createElement('div');\
+                    stockElement.className = 'flex justify-between items-center bg-card border border-card rounded-lg p-4 hover:border-gray-500 transition-colors cursor-pointer';\
+                    stockElement.innerHTML = `\
+                        <div>\
+                            <div class="font-bold text-lg">$\{stock.symbol\}</div>\
+                            <div class="text-sm text-gray-400">$\{stock.shares\} Shares</div>\
+                        </div>\
+                        <div class="text-right">\
+                            <div class="font-bold text-lg">$$\{stock.value.toLocaleString('en-US', \{minimumFractionDigits: 2, maximumFractionDigits: 2\})\}</div>\
+                            <div class="text-sm $\{isPositive ? 'text-brand-green' : 'text-red-500'\}">\
+                                $\{isPositive ? '+' : ''\}$\{changeValue\} ($\{isPositive ? '+' : ''\}$\{changePercent\}%)\
+                            </div>\
+                        </div>\
+                    `;\
+                    stocksListContainer.appendChild(stockElement);\
+                \});\
+\
+                // --- Chart.js Setup ---\
+                const ctx = document.getElementById('portfolioChart').getContext('2d');\
+                const gradient = ctx.createLinearGradient(0, 0, 0, 300);\
+                gradient.addColorStop(0, 'rgba(0, 200, 5, 0.3)');\
+                gradient.addColorStop(1, 'rgba(0, 200, 5, 0)');\
+\
+                const portfolioChart = new Chart(ctx, \{\
+                    type: 'line',\
+                    data: \{ labels: [], datasets: [\{\
+                        label: 'Portfolio Value',\
+                        data: [],\
+                        borderColor: '#00C805',\
+                        borderWidth: 2.5,\
+                        pointRadius: 0,\
+                        pointHoverRadius: 6,\
+                        pointBackgroundColor: '#00C805',\
+                        pointBorderColor: '#FFFFFF',\
+                        tension: 0.4,\
+                        fill: \{ target: 'origin', above: gradient \},\
+                    \}]\},\
+                    options: \{\
+                        responsive: true,\
+                        maintainAspectRatio: false,\
+                        plugins: \{ legend: \{ display: false \}, tooltip: \{\
+                            mode: 'index', intersect: false, backgroundColor: '#181B1F',\
+                            titleFont: \{ size: 14, weight: 'bold' \}, bodyFont: \{ size: 12 \},\
+                            padding: 12, cornerRadius: 8, displayColors: false,\
+                            callbacks: \{ label: (c) => c.parsed.y !== null ? new Intl.NumberFormat('en-US', \{ style: 'currency', currency: 'USD' \}).format(c.parsed.y) : null \}\
+                        \}\},\
+                        scales: \{ x: \{ display: false \}, y: \{ display: false \} \},\
+                        interaction: \{ mode: 'index', intersect: false \},\
+                    \}\
+                \});\
+\
+                // --- Interactive Chart and Value Logic ---\
+                const updatePortfolioView = (period) => \{\
+                    const percentageChange = (Math.random() * 1 - 0.5) * 2; \
+                    const changeAmount = baseValue * (percentageChange / 100);\
+                    const newValue = baseValue + changeAmount;\
+                    const isPositive = changeAmount >= 0;\
+\
+                    portfolioValueEl.textContent = newValue.toLocaleString('en-US', \{ style: 'currency', currency: 'USD' \});\
+                    portfolioChangeEl.textContent = `$\{isPositive ? '+' : ''\}$\{changeAmount.toLocaleString('en-US', \{ style: 'currency', currency: 'USD' \})\} ($\{isPositive ? '+' : ''\}$\{percentageChange.toFixed(2)\}%)`;\
+                    portfolioChangeEl.className = `font-medium $\{isPositive ? 'text-brand-green' : 'text-red-500'\}`;\
+                    \
+                    const periodText = \{ '1D': 'Today', '1W': 'Past Week', '1M': 'Past Month', '3M': 'Past 3 Months', '1Y': 'Past Year', 'ALL': 'All Time' \};\
+                    portfolioPeriodEl.textContent = periodText[period];\
+\
+                    const dataPoints = \{ '1D': 8, '1W': 7, '1M': 30, '3M': 90, '1Y': 12, 'ALL': 48 \};\
+                    const pointCount = dataPoints[period];\
+                    const newChartData = [];\
+                    for (let i = 0; i < pointCount; i++) \{\
+                        const randomFactor = (Math.random() - 0.5) * (baseValue * 0.02);\
+                        newChartData.push(baseValue + randomFactor);\
+                    \}\
+                    newChartData[pointCount - 1] = newValue;\
+\
+                    const newLabels = Array(pointCount).fill('');\
+\
+                    portfolioChart.data.labels = newLabels;\
+                    portfolioChart.data.datasets[0].data = newChartData;\
+                    portfolioChart.update('none');\
+                \};\
+\
+                // --- Event Listeners for Time Selector ---\
+                timeSelectorButtons.forEach(button => \{\
+                    button.addEventListener('click', () => \{\
+                        timeSelectorButtons.forEach(btn => btn.classList.remove('active'));\
+                        button.classList.add('active');\
+                        const period = button.getAttribute('data-period');\
+                        updatePortfolioView(period);\
+                    \});\
+                \});\
+\
+                // --- Initial Load of the app view ---\
+                updatePortfolioView('1D');\
+            \}\
+        \});\
+    </script>\
+</body>\
+</html>\
+}
